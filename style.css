@@ -58,6 +58,20 @@ body {
 
 .header-name:hover { color: #aaa; }
 
+a.header-person { text-decoration: none; transition: transform 0.15s; }
+a.header-person:hover { transform: translateY(-2px); }
+a.header-person:hover .avatar { border-color: #5b8dd9; }
+
+.genesis-link {
+  display: inline-block;
+  margin-top: 0.8rem;
+  font-size: 0.8rem;
+  color: #555;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.genesis-link:hover { color: #5b8dd9; }
+
 @media (max-width: 500px) {
   .header { flex-direction: column; }
   .header-center h1 { font-size: 1.1rem; }

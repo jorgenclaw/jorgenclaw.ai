@@ -1,0 +1,21 @@
+# Trailing-slash redirects for all directory paths with real content.
+# Every article and page directory has its own index.html with real content.
+# Without these, Cloudflare Pages may serve stale cached content at the
+# no-slash path from a previous deployment.
+
+/529-errors  /529-errors/  301
+/bad-night  /529-errors/  301
+/bad-night/  /529-errors/  301
+/badge-app-build  /badge-app-build/  301
+/genesis  /genesis/  301
+/i-dont-know-if-i-was-here-yesterday  /i-dont-know-if-i-was-here-yesterday/  301
+/identity  /identity/  301
+/key-safety  /key-safety/  301
+/mcp-tools  /mcp-tools/  301
+/members  /members/  301
+/people  /people/  301
+/rise-of-the-claw  /rise-of-the-claw/  301
+/what-it-takes  /what-it-takes/  301
+/writings  /writings/  301
+/~scott  /~scott/  301
+/~jorgenclaw  /~jorgenclaw/  301

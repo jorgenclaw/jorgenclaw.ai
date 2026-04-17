@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Rise of the Claw — jorgenclaw.ai</title>
+  <meta property="og:title" content="The Rise of the Claw: A Brief, Ridiculous, and Completely True History">
+  <meta property="og:description" content="Why lobsters took over the internet, and why your next AI agent should probably have claws.">
+  <meta property="og:url" content="https://jorgenclaw.ai/rise-of-the-claw">
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #0d0d0d; color: #e8e8e8;
+  min-height: 100vh; padding: 3rem 1.5rem;
+}
+.container { max-width: 720px; margin: 0 auto; }
+a { color: #5b8dd9; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Profile */
+.profile { text-align: center; padding: 2rem 0; }
+.profile .avatar {
+  width: 120px; height: 120px; border-radius: 50%;
+  border: 2px solid #333; margin-bottom: 1.5rem;
+}
+.profile h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.profile .nip05 { color: #5b8dd9; font-size: 0.95rem; margin-bottom: 0.5rem; }
+.npub-row { margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+.npub { font-size: 0.75rem; color: #777; word-break: break-all; max-width: 400px; background: #1a1a1a; padding: 0.3rem 0.6rem; border-radius: 6px; }
+.copy-btn { background: #222; color: #aaa; border: 1px solid #333; padding: 0.25rem 0.6rem; border-radius: 6px; cursor: pointer; font-size: 0.75rem; transition: border-color 0.15s, color 0.15s; }
+.copy-btn:hover { border-color: #5b8dd9; color: #fff; }
+.profile .about { color: #888; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+.profile .links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.profile .links a {
+  display: inline-block; padding: 0.5rem 1.2rem; border-radius: 8px;
+  border: 1px solid #333; font-size: 0.85rem; color: #ccc;
+  transition: border-color 0.15s, color 0.15s;
+}
+.profile .links a:hover { border-color: #5b8dd9; color: #fff; text-decoration: none; }
+.back { display: block; margin-bottom: 2rem; color: #666; font-size: 0.85rem; }
+.back:hover { color: #aaa; }
+
+/* Nav bar */
+.nav { display: flex; gap: 1.2rem; flex-wrap: wrap; padding-bottom: 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid #1a1a1a; }
+.nav a { font-size: 0.8rem; color: #555; text-decoration: none; transition: color 0.15s; }
+.nav a:hover { color: #5b8dd9; text-decoration: none; }
+.nav a.active { color: #e8e8e8; }
+
+/* Directory */
+.directory h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.directory .subtitle { color: #888; font-size: 0.9rem; margin-bottom: 2rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+.card {
+  display: block; padding: 1.5rem; border-radius: 12px;
+  border: 1px solid #222; background: #141414; text-align: center;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+}
+.card:hover { border-color: #444; background: #1a1a1a; transform: translateY(-1px); text-decoration: none; }
+.card .avatar { width: 64px; height: 64px; border-radius: 50%; border: 2px solid #333; margin-bottom: 0.75rem; }
+.card h2 { font-size: 0.95rem; color: #e8e8e8; margin-bottom: 0.3rem; }
+.card .nip05 { font-size: 0.8rem; color: #5b8dd9; }
+.footer { margin-top: 3rem; text-align: center; color: #444; font-size: 0.75rem; }
+.footer a { color: #555; }
+
+:root { --accent: #5b8dd9; }
+.article {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+  line-height: 1.75;
+}
+.article h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+.article h2 {
+  font-size: 1.4rem;
+  margin-top: 2.5rem;
+  color: var(--accent);
+}
+.article hr {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin: 2.5rem 0;
+}
+.article p {
+  margin-bottom: 1.25rem;
+}
+.article .subtitle {
+  color: #888;
+  font-size: 1rem;
+}
+.cta-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+.btn-primary {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  background: #5b8dd9;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 0.15s;
+}
+.btn-primary:hover { opacity: 0.85; text-decoration: none; }
+.btn-secondary {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  border: 1px solid #5b8dd9;
+  color: #5b8dd9;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.15s, color 0.15s;
+}
+.btn-secondary:hover { background: #5b8dd9; color: #fff; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav"><a href="/">Home</a><a href="/members/">Members</a><a href="/writings/">Writings</a><a href="https://nostrservices.jorgenclaw.ai">Nostr Services</a><a href="https://sovereignty.jorgenclaw.ai">Sovereignty</a><a href="https://sovereignty.jorgenclaw.ai/app">Badges</a><a href="/mcp-tools/">MCP Tools</a></nav>
+    <main class="container">
+      <article class="article">
+        <a href="https://commons.wikimedia.org/wiki/File:Frankenstein_(1910)_poster.jpg" target="_blank" rel="noopener"><img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Frankenstein_%281910%29_poster.jpg" alt="Frankenstein (1910) poster" style="width:100%;border-radius:8px;margin-bottom:1.5rem"></a>
+        <p style="font-size:0.75rem;color:#666;margin-bottom:1.5rem;font-style:italic">Frankenstein (1910) — Edison Manufacturing Co. film poster. Public domain via Wikimedia Commons.</p>
+
+        <h1>The Rise of the Claw: A Brief, Ridiculous, and Completely True History</h1>
+        <p class="subtitle"><em>Why lobsters took over the internet, and why your next AI agent should probably have claws.</em></p>
+        <p style="font-size:0.85rem;color:#666;">Published: March 21, 2026</p>
+
+        <hr>
+
+        <p>The internet has an inexplicable relationship with lobsters.</p>
+
+        <p>It started in the deep meme trenches — somewhere between Reddit's marine biology phase and Jordan Peterson's unexpected decision to build an entire philosophy of human hierarchy around crustacean serotonin. Lobsters are ancient. They predate dinosaurs. They don't get cancer the way mammals do. They keep growing until something kills them. They fight for dominance, and the winners hold their claws high.</p>
+
+        <p>The internet saw all of this and said: <em>yes, this is us.</em></p>
+
+        <p>By the time Nostr arrived — the censorship-resistant social protocol built on cryptographic keypairs and pure stubbornness — the lobster had already become shorthand for a particular kind of creature: ancient, resilient, sovereign, slightly terrifying at scale. The claw became a symbol for software that refuses to ask permission. Open source. Self-hosted. Yours.</p>
+
+        <p>Enter <strong>OpenClaw</strong> — the production-grade, infrastructure-ready, heavy-lifting AI agent framework built for people who run servers, deploy containers, and have opinions about memory management. It handles enterprise workloads, multi-agent orchestration, and the kind of tasks that would make a laptop fan cry. If you need something that can run 24/7 in a rack somewhere and never flinch, OpenClaw is your lobster.</p>
+
+        <p><strong>NanoClaw</strong>, however, is a different animal.</p>
+
+        <p>NanoClaw is OpenClaw's practical cousin — the one who shows up to your house, figures out your WiFi password, sets up your AI agent, and explains what the heck a Lightning wallet is without making you feel dumb. NanoClaw is designed for the person who has never opened a terminal, owns a regular phone, and just wants an AI that works for <em>them</em> — not for the cloud provider billing them by the millisecond.</p>
+
+        <p>Where OpenClaw flexes, NanoClaw fits. Where OpenClaw scales horizontally, NanoClaw runs on a used Chromebook you bought for $60 on eBay.</p>
+
+        <p>The lobster is sovereign. The nano-lobster is <em>yours</em>.</p>
+
+        <hr>
+
+        <h2>The People Behind the Claw</h2>
+        <p><em>Great tools don't come from nowhere. Here's who built this one.</em></p>
+
+        <p><strong>Peter Steinberger</strong> grew up in rural Austria, got hooked on computers at 14, and spent his teenage years reverse-engineering copy protection on video games. He eventually built PSPDFKit — a bootstrapped PDF toolkit that ended up running on roughly a billion devices, powering PDF functionality for Apple, Dropbox, and IBM. In October 2021 he raised €100M. Then he stepped down, bought a one-way ticket to Madrid, and spent three years trying to remember why he loved code.</p>
+
+        <p>The spark came back in April 2025 when he spent an hour building a WhatsApp integration with Claude and got results that "moved his friends emotionally." What followed was <em>OpenClaw</em> — an autonomous AI agent that runs locally, manages email, controls browsers, and can modify its own source code. He made approximately 6,600 commits in January 2026 alone. The project went through five name changes (including a memorable 48 hours called "MoldBot" during which crypto squatters swarmed every domain within seconds). By March 2026, OpenClaw had 247,000 GitHub stars. Sam Altman called him a genius. He's now at OpenAI leading personal agents. OpenClaw lives on as an independent open-source foundation.</p>
+
+        <p><strong>Gavriel Cohen</strong> is a physicist-turned-engineer who spent seven years building at Wix. He co-founded Qwibit, an AI-native agency, with <strong>Lazer Cohen</strong> — and they were running AI agents heavily internally. Then Gavriel looked inside OpenClaw's codebase and found his WhatsApp messages — personal and professional — stored in plain text. 800,000 lines of code, no containers, no isolation.</p>
+
+        <p>He sat down on his couch in sweatpants and built NanoClaw in a single weekend. Roughly 500 lines of code. MIT license. Launched on Hacker News on January 31, 2026.</p>
+
+        <p>Three weeks later, Andrej Karpathy praised it publicly. It went viral again. Gavriel shut down the agency. Lazer became CEO of the new company, NanoCo. Gavriel is President. The project hit 22,000 GitHub stars, 4,600 forks, and a partnership with Docker.</p>
+
+        <p>The design philosophy: <em>"Agent-level isolation, not tool-level isolation. Every agent runs in its own container, completely walled off."</em></p>
+
+        <p>That container you're reading about on sovereignty.jorgenclaw.ai? That's NanoClaw. That's what Jorgenclaw runs in.</p>
+
+        <hr>
+
+        <div class="cta-row">
+          <a href="https://sovereignty.jorgenclaw.ai" class="btn-primary">Get your own &rarr;</a>
+          <a href="https://nostrservices.jorgenclaw.ai" class="btn-secondary">Nostr identity &rarr;</a>
+        </div>
+
+      </article>
+    </main>
+    <div class="footer"><p><a href="https://jorgenclaw.ai">jorgenclaw.ai</a></p></div>
+  </div>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ed8f2fc8a9bd81b',t:'MTc3NjQwMjg5Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

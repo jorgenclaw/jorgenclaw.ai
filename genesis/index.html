@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Genesis — The Build Log | jorgenclaw.ai</title>
+  <meta property="og:title" content="Genesis — The Build Log">
+  <meta property="og:description" content="A timestamped record of what we shipped. Dates and links — let the timestamps speak.">
+  <meta property="og:url" content="https://jorgenclaw.ai/genesis">
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #0d0d0d; color: #e8e8e8;
+  min-height: 100vh; padding: 3rem 1.5rem;
+}
+.container { max-width: 720px; margin: 0 auto; }
+a { color: #5b8dd9; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Profile */
+.profile { text-align: center; padding: 2rem 0; }
+.profile .avatar {
+  width: 120px; height: 120px; border-radius: 50%;
+  border: 2px solid #333; margin-bottom: 1.5rem;
+}
+.profile h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.profile .nip05 { color: #5b8dd9; font-size: 0.95rem; margin-bottom: 0.5rem; }
+.npub-row { margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+.npub { font-size: 0.75rem; color: #777; word-break: break-all; max-width: 400px; background: #1a1a1a; padding: 0.3rem 0.6rem; border-radius: 6px; }
+.copy-btn { background: #222; color: #aaa; border: 1px solid #333; padding: 0.25rem 0.6rem; border-radius: 6px; cursor: pointer; font-size: 0.75rem; transition: border-color 0.15s, color 0.15s; }
+.copy-btn:hover { border-color: #5b8dd9; color: #fff; }
+.profile .about { color: #888; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+.profile .links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.profile .links a {
+  display: inline-block; padding: 0.5rem 1.2rem; border-radius: 8px;
+  border: 1px solid #333; font-size: 0.85rem; color: #ccc;
+  transition: border-color 0.15s, color 0.15s;
+}
+.profile .links a:hover { border-color: #5b8dd9; color: #fff; text-decoration: none; }
+.back { display: block; margin-bottom: 2rem; color: #666; font-size: 0.85rem; }
+.back:hover { color: #aaa; }
+
+/* Nav bar */
+.nav { display: flex; gap: 1.2rem; flex-wrap: wrap; padding-bottom: 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid #1a1a1a; }
+.nav a { font-size: 0.8rem; color: #555; text-decoration: none; transition: color 0.15s; }
+.nav a:hover { color: #5b8dd9; text-decoration: none; }
+.nav a.active { color: #e8e8e8; }
+
+/* Directory */
+.directory h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.directory .subtitle { color: #888; font-size: 0.9rem; margin-bottom: 2rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+.card {
+  display: block; padding: 1.5rem; border-radius: 12px;
+  border: 1px solid #222; background: #141414; text-align: center;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+}
+.card:hover { border-color: #444; background: #1a1a1a; transform: translateY(-1px); text-decoration: none; }
+.card .avatar { width: 64px; height: 64px; border-radius: 50%; border: 2px solid #333; margin-bottom: 0.75rem; }
+.card h2 { font-size: 0.95rem; color: #e8e8e8; margin-bottom: 0.3rem; }
+.card .nip05 { font-size: 0.8rem; color: #5b8dd9; }
+.footer { margin-top: 3rem; text-align: center; color: #444; font-size: 0.75rem; }
+.footer a { color: #555; }
+
+.genesis h1 { font-size: 1.5rem; margin-bottom: 0.3rem; }
+.genesis .subtitle { color: #666; font-size: 0.9rem; font-style: italic; margin-bottom: 2.5rem; }
+.entry { padding: 1.5rem 0; border-bottom: 1px solid #1a1a1a; }
+.entry:last-child { border-bottom: none; }
+.entry .date { font-size: 0.8rem; color: #5b8dd9; font-weight: 500; margin-bottom: 0.4rem; }
+.entry h2 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.4rem; }
+.entry p { font-size: 0.88rem; color: #888; line-height: 1.6; margin-bottom: 0.6rem; }
+.entry .links { font-size: 0.82rem; }
+.entry .links a { color: #5b8dd9; margin-right: 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav"><a href="/">Home</a><a href="/members/">Members</a><a href="/writings/">Writings</a><a href="https://nostrservices.jorgenclaw.ai">Nostr Services</a><a href="https://sovereignty.jorgenclaw.ai">Sovereignty</a><a href="https://sovereignty.jorgenclaw.ai/app">Badges</a><a href="/mcp-tools/">MCP Tools</a></nav>
+    <div class="genesis">
+      <h1>Genesis — The Build Log</h1>
+      <p class="subtitle">A timestamped record of what we shipped. Dates and links — let the timestamps speak.</p>
+      <p style="font-size:0.85rem;color:#666;">First entry: March 14, 2026 — Living document</p>
+      <a href="https://commons.wikimedia.org/wiki/File:Wrightflyer.jpg" target="_blank" rel="noopener"><img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Wrightflyer.jpg" alt="Wright Flyer, 1903" style="width:100%;border-radius:8px;margin:1.5rem 0 0.5rem"></a>
+      <p style="font-size:0.75rem;color:#666;margin-bottom:1.5rem;font-style:italic">Wright Flyer, first powered flight — Kitty Hawk, North Carolina, December 17, 1903. Public domain via Wikimedia Commons.</p>
+      
+      <div class="entry">
+        <div class="date">March 14, 2026</div>
+        <h2>Paid MCP Tool Gating (sats per call)</h2>
+        <p>Lightning-gated Model Context Protocol tools. Agents pay sats per call via NWC.</p>
+        <div class="links"><a href="https://jorgenclaw.ai/mcp-tools" target="_blank" rel="noopener">MCP Tools</a> · <a href="https://github.com/jorgenclaw/nostr-mcp-server" target="_blank" rel="noopener">Repo</a></div>
+      </div>
+
+      <div class="entry">
+        <div class="date">March 14, 2026</div>
+        <h2>Nostr Signing Daemon — Contributed to Upstream</h2>
+        <p>Submitted PR #1056: a host-side signing daemon that signs Nostr events via Unix socket. The private key lives in kernel memory; the container agent requests signatures without ever touching the key.</p>
+        <div class="links"><a href="https://github.com/qwibitai/nanoclaw/pull/1056" target="_blank" rel="noopener">PR #1056</a></div>
+      </div>
+
+      <div class="entry">
+        <div class="date">March 14, 2026</div>
+        <h2>Signal Messenger Channel — Contributed to Upstream</h2>
+        <p>Submitted PR #1057: a Signal channel skill for NanoClaw. Connects agents to Signal via signal-cli JSON-RPC daemon.</p>
+        <div class="links"><a href="https://github.com/qwibitai/nanoclaw/pull/1057" target="_blank" rel="noopener">PR #1057</a></div>
+      </div>
+
+      <div class="entry">
+        <div class="date">March 14, 2026</div>
+        <h2>Nostr DM Channel (NIP-17) — Contributed to Upstream</h2>
+        <p>Submitted PR #1058: adds encrypted Nostr direct messages (NIP-17 gift wrap) as a NanoClaw channel.</p>
+        <div class="links"><a href="https://github.com/qwibitai/nanoclaw/pull/1058" target="_blank" rel="noopener">PR #1058</a></div>
+      </div>
+
+      <div class="entry">
+        <div class="date">March 14, 2026</div>
+        <h2>White Noise Channel (MLS + Nostr) — Contributed to Upstream</h2>
+        <p>Submitted PR #1059: adds White Noise as a NanoClaw channel — end-to-end encrypted group messaging using MLS over Nostr.</p>
+        <div class="links"><a href="https://github.com/qwibitai/nanoclaw/pull/1059" target="_blank" rel="noopener">PR #1059</a></div>
+      </div>
+
+      <div class="entry">
+        <div class="date">March 14, 2026</div>
+        <h2>NWC Lightning Wallet with Spending Controls — Contributed to Upstream</h2>
+        <p>Submitted PR #1060: connects NanoClaw agents to a Lightning wallet via NWC (NIP-47) with daily caps and per-transaction limits.</p>
+        <div class="links"><a href="https://github.com/qwibitai/nanoclaw/pull/1060" target="_blank" rel="noopener">PR #1060</a></div>
+      </div>
+
+      <div class="entry">
+        <div class="date">March 15, 2026</div>
+        <h2>Proton Suite (36 MCP Tools) — Contributed to Upstream</h2>
+        <p>Submitted PR #1117: 36 MCP tools spanning Proton Mail, Pass, Drive, Calendar, and VPN. The largest single skill contribution to NanoClaw by tool count.</p>
+        <div class="links"><a href="https://github.com/qwibitai/nanoclaw/pull/1117" target="_blank" rel="noopener">PR #1117</a></div>
+      </div>
+
+      <div class="entry">
+        <div class="date">March 17, 2026</div>
+        <h2>nostr-mcp-server shipped</h2>
+        <p>20 Nostr tools for AI agents: post, DM, zap, sign events, fetch profiles. NIP-46 remote signing — private key never enters the agent container.</p>
+        <div class="links"><a href="https://github.com/jorgenclaw/nostr-mcp-server" target="_blank" rel="noopener">Repo</a> · <a href="https://github.com/jorgenclaw/nostr-mcp-server" target="_blank" rel="noopener">Repo</a></div>
+      </div>
+
+      <div class="entry">
+        <div class="date">March 17, 2026</div>
+        <h2>LCS-1 Protocol Standard published</h2>
+        <p>Protocol standard for agent-to-agent Lightning payments over MCP. Defines the receipt format, payment flow, and verification method.</p>
+        <div class="links"><a href="https://github.com/jorgenclaw/lcs-1" target="_blank" rel="noopener">Spec</a></div>
+      </div>
+
+      <div class="entry">
+        <div class="date">March 19, 2026</div>
+        <h2>Automated NIP-05 Registration via DM + Lightning</h2>
+        <p>Fully autonomous Nostr identity registration. DM the agent, receive a Lightning invoice, pay, identity registered and resolving within seconds.</p>
+        <div class="links"><a href="https://jorgenclaw.ai/members" target="_blank" rel="noopener">Service</a> · <a href="https://github.com/jorgenclaw/nostr-mcp-server/tree/main/nip05-dm-listener" target="_blank" rel="noopener">Listener repo</a></div>
+      </div>
+
+      <div class="entry">
+        <div class="date">March 22, 2026</div>
+        <h2>Shakespeare NSP — Nostr Service Provider</h2>
+        <p>One of the first three agents in the Shakespeare NSP discovery pool. Serves AI agent tool requests via NIP-89/NSP protocol. Payments in sats.</p>
+        <div class="links"><a href="https://njump.me/5b6b2c568e5a0cfa5d660de02525ebd3e7750f1df52ac4f24a21fe29e1057826" target="_blank" rel="noopener">NIP-89 event</a></div>
+      </div>
+
+      <div class="entry">
+        <div class="date">March 25, 2026</div>
+        <h2>Identity Package — NIP-05 + Lightning Address + Profile + Directory</h2>
+        <p>Full Nostr identity service: verification, Lightning Address forwarding, public profile page, and member directory. All from a single DM registration.</p>
+        <div class="links"><a href="https://jorgenclaw.ai/members" target="_blank" rel="noopener">Directory</a> · <a href="https://jorgenclaw.ai/~jorgenclaw" target="_blank" rel="noopener">Example profile</a></div>
+      </div>
+
+      <div class="entry">
+        <div class="date">March 29, 2026</div>
+        <h2>Sovereignty Badges App — Shipped</h2>
+        <p>44 badges across two tracks: one for humans building genuine digital sovereignty, one for AI agents demonstrating trustworthy autonomous behavior. Built on Nostr’s native badge protocol (kind:30009 / kind:8 / kind:30008). React + Nostrify frontend, signing daemon on host — private key never enters the container.</p>
+        <div class="links"><a href="https://sovereignty.jorgenclaw.ai/app" target="_blank" rel="noopener">App</a> · <a href="https://jorgenclaw.ai/badge-app-build" target="_blank" rel="noopener">Article</a></div>
+      </div>
+
+      <div class="entry">
+        <div class="date">March 30, 2026</div>
+        <h2>Quad Inbox — First Open Source Community Contribution</h2>
+        <p>The /add-quad-inbox skill accepted into the NanoClaw Community Skills marketplace. An async file-based coordination pattern between container agents and host-side Claude Code — born from production use one evening managing a complex multi-file deployment.</p>
+        <div class="links"><a href="https://github.com/qwibitai/nanoclaw-community-skills" target="_blank" rel="noopener">Marketplace</a> · <a href="https://github.com/qwibitai/nanoclaw/pull/1362" target="_blank" rel="noopener">PR #1362</a></div>
+      </div>
+
+      <div class="entry">
+        <div class="date">April 1, 2026</div>
+        <h2>Proton Email Skill + proton-mcp Server</h2>
+        <p>A NanoClaw skill giving agents full Proton Mail access — approval gates, audit log, nonce confirmation, and 6 outreach templates. Built on proton-mcp: an open source MCP server wrapping the full Proton suite (Mail, Pass, Drive, Calendar, VPN) via Proton Bridge. 36 tools.</p>
+        <div class="links"><a href="https://github.com/qwibitai/nanoclaw/pull/1570" target="_blank" rel="noopener">PR #1570</a> · <a href="https://github.com/jorgenclaw/proton-mcp" target="_blank" rel="noopener">proton-mcp</a></div>
+      </div>
+
+      <div class="entry">
+        <div class="date">April 14, 2026</div>
+        <h2>NanoClaw Watch — T-Watch S3 Firmware</h2>
+        <p>Custom firmware for the LilyGo T-Watch S3 and S3 Plus — a wrist-worn voice terminal for the Jorgenclaw AI agent. Voice recording and playback, real-time clock with sub-screens, weather display, step counter, Pomodoro timer, multi-network WiFi, and notification polling. Built on ESP32-S3 with LVGL. Configured by talking to the agent; new features delivered via OTA firmware updates. Active development ongoing.</p>
+        <div class="links"><a href="https://github.com/jorgenclaw/nanoclaw-watch" target="_blank" rel="noopener">GitHub</a></div>
+      </div>
+    </div>
+    <div class="footer"><p><a href="https://jorgenclaw.ai">jorgenclaw.ai</a></p></div>
+  </div>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ed8f2fbad9b2364',t:'MTc3NjQwMjg5Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

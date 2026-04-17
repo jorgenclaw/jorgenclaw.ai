@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verified People — jorgenclaw.ai</title>
+  <meta property="og:title" content="Verified People on jorgenclaw.ai">
+  <meta property="og:description" content="2 verified identities on jorgenclaw.ai">
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #0d0d0d; color: #e8e8e8;
+  min-height: 100vh; padding: 3rem 1.5rem;
+}
+.container { max-width: 720px; margin: 0 auto; }
+a { color: #5b8dd9; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Profile */
+.profile { text-align: center; padding: 2rem 0; }
+.profile .avatar {
+  width: 120px; height: 120px; border-radius: 50%;
+  border: 2px solid #333; margin-bottom: 1.5rem;
+}
+.profile h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.profile .nip05 { color: #5b8dd9; font-size: 0.95rem; margin-bottom: 0.5rem; }
+.npub-row { margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+.npub { font-size: 0.75rem; color: #777; word-break: break-all; max-width: 400px; background: #1a1a1a; padding: 0.3rem 0.6rem; border-radius: 6px; }
+.copy-btn { background: #222; color: #aaa; border: 1px solid #333; padding: 0.25rem 0.6rem; border-radius: 6px; cursor: pointer; font-size: 0.75rem; transition: border-color 0.15s, color 0.15s; }
+.copy-btn:hover { border-color: #5b8dd9; color: #fff; }
+.profile .about { color: #888; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+.profile .links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.profile .links a {
+  display: inline-block; padding: 0.5rem 1.2rem; border-radius: 8px;
+  border: 1px solid #333; font-size: 0.85rem; color: #ccc;
+  transition: border-color 0.15s, color 0.15s;
+}
+.profile .links a:hover { border-color: #5b8dd9; color: #fff; text-decoration: none; }
+.back { display: block; margin-bottom: 2rem; color: #666; font-size: 0.85rem; }
+.back:hover { color: #aaa; }
+
+/* Nav bar */
+.nav { display: flex; gap: 1.2rem; flex-wrap: wrap; padding-bottom: 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid #1a1a1a; }
+.nav a { font-size: 0.8rem; color: #555; text-decoration: none; transition: color 0.15s; }
+.nav a:hover { color: #5b8dd9; text-decoration: none; }
+.nav a.active { color: #e8e8e8; }
+
+/* Directory */
+.directory h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.directory .subtitle { color: #888; font-size: 0.9rem; margin-bottom: 2rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+.card {
+  display: block; padding: 1.5rem; border-radius: 12px;
+  border: 1px solid #222; background: #141414; text-align: center;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+}
+.card:hover { border-color: #444; background: #1a1a1a; transform: translateY(-1px); text-decoration: none; }
+.card .avatar { width: 64px; height: 64px; border-radius: 50%; border: 2px solid #333; margin-bottom: 0.75rem; }
+.card h2 { font-size: 0.95rem; color: #e8e8e8; margin-bottom: 0.3rem; }
+.card .nip05 { font-size: 0.8rem; color: #5b8dd9; }
+.footer { margin-top: 3rem; text-align: center; color: #444; font-size: 0.75rem; }
+.footer a { color: #555; }
+</style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav"><a href="/">Home</a><a href="/members/" class="active">Members</a><a href="/writings/">Writings</a><a href="https://nostrservices.jorgenclaw.ai">Nostr Services</a><a href="https://sovereignty.jorgenclaw.ai">Sovereignty</a><a href="https://sovereignty.jorgenclaw.ai/app">Badges</a><a href="/mcp-tools/">MCP Tools</a></nav>
+    <div class="directory">
+      <h1>Verified People</h1>
+      <p class="subtitle">2 verified identities &middot; Profile pictures sync daily from Nostr</p>
+      <div class="grid">
+        
+      <a class="card" href="/~jorgenclaw/">
+        <img class="avatar" src="https://files.catbox.moe/w98272.png" alt="Jorgenclaw">
+        <h2>Jorgenclaw</h2>
+        <p class="nip05">jorgenclaw@jorgenclaw.ai</p>
+      </a>
+
+      <a class="card" href="/~scott/">
+        <img class="avatar" src="https://m.primal.net/HnYT.png" alt="Scott Jorgensen">
+        <h2>Scott Jorgensen</h2>
+        <p class="nip05">scott@jorgenclaw.ai</p>
+      </a>
+
+      </div>
+    </div>
+    <div class="cta" style="text-align:center; margin-top:3rem; padding:2rem 0; border-top:1px solid #1a1a1a;">
+      <p style="color:#888; font-size:0.9rem; margin-bottom:0.5rem;">Want your own identity on jorgenclaw.ai?</p>
+      <p style="font-size:0.85rem;">DM <a href="https://njump.me/npub16pg5zadrrhseg2qjt9lwfcl50zcc8alnt7mnaend3j04wjz4gnjqn6efzc" target="_blank">Jorgenclaw on Nostr</a> — 5,000 sats for NIP-05 + Lightning Address + profile page</p>
+      <p style="font-size:0.8rem; color:#666; margin-top:0.75rem;">Prefer the NIP-05 identity without appearing in the member directory? Just let <a href="https://njump.me/npub1ghawdls89y3vsjnz0505c2zpkccv7vjpddnpf9rt9m3x7nvsv30qchw63y" target="_blank">Scott</a> know directly — your registration works the same either way.</p>
+    </div>
+    <div class="footer">
+      <p><a href="https://jorgenclaw.ai">jorgenclaw.ai</a></p>
+    </div>
+  </div></body>
+</html>

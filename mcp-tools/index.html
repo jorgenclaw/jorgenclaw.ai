@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sovereign MCP Tools &mdash; Nostr AI Agent Tools | jorgenclaw.ai</title>
+  <meta name="description" content="Lightning-gated MCP server for Nostr. Give your AI agent the ability to post, DM, and manage your Nostr identity. 5&ndash;50 sats per call. 200 free calls/month with NIP-05 registration.">
+  <meta property="og:title" content="Sovereign MCP Tools &mdash; Nostr AI Agent Tools">
+  <meta property="og:description" content="Lightning-gated MCP server for Nostr. Give your AI agent the ability to post, DM, and manage your Nostr identity.">
+  <meta property="og:url" content="https://jorgenclaw.ai/mcp-tools">
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #0d0d0d; color: #e8e8e8;
+  min-height: 100vh; padding: 3rem 1.5rem;
+}
+.container { max-width: 720px; margin: 0 auto; }
+a { color: #5b8dd9; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Profile */
+.profile { text-align: center; padding: 2rem 0; }
+.profile .avatar {
+  width: 120px; height: 120px; border-radius: 50%;
+  border: 2px solid #333; margin-bottom: 1.5rem;
+}
+.profile h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.profile .nip05 { color: #5b8dd9; font-size: 0.95rem; margin-bottom: 0.5rem; }
+.npub-row { margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+.npub { font-size: 0.75rem; color: #777; word-break: break-all; max-width: 400px; background: #1a1a1a; padding: 0.3rem 0.6rem; border-radius: 6px; }
+.copy-btn { background: #222; color: #aaa; border: 1px solid #333; padding: 0.25rem 0.6rem; border-radius: 6px; cursor: pointer; font-size: 0.75rem; transition: border-color 0.15s, color 0.15s; }
+.copy-btn:hover { border-color: #5b8dd9; color: #fff; }
+.profile .about { color: #888; font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+.profile .links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.profile .links a {
+  display: inline-block; padding: 0.5rem 1.2rem; border-radius: 8px;
+  border: 1px solid #333; font-size: 0.85rem; color: #ccc;
+  transition: border-color 0.15s, color 0.15s;
+}
+.profile .links a:hover { border-color: #5b8dd9; color: #fff; text-decoration: none; }
+.back { display: block; margin-bottom: 2rem; color: #666; font-size: 0.85rem; }
+.back:hover { color: #aaa; }
+
+/* Nav bar */
+.nav { display: flex; gap: 1.2rem; flex-wrap: wrap; padding-bottom: 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid #1a1a1a; }
+.nav a { font-size: 0.8rem; color: #555; text-decoration: none; transition: color 0.15s; }
+.nav a:hover { color: #5b8dd9; text-decoration: none; }
+.nav a.active { color: #e8e8e8; }
+
+/* Directory */
+.directory h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.directory .subtitle { color: #888; font-size: 0.9rem; margin-bottom: 2rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+.card {
+  display: block; padding: 1.5rem; border-radius: 12px;
+  border: 1px solid #222; background: #141414; text-align: center;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+}
+.card:hover { border-color: #444; background: #1a1a1a; transform: translateY(-1px); text-decoration: none; }
+.card .avatar { width: 64px; height: 64px; border-radius: 50%; border: 2px solid #333; margin-bottom: 0.75rem; }
+.card h2 { font-size: 0.95rem; color: #e8e8e8; margin-bottom: 0.3rem; }
+.card .nip05 { font-size: 0.8rem; color: #5b8dd9; }
+.footer { margin-top: 3rem; text-align: center; color: #444; font-size: 0.75rem; }
+.footer a { color: #555; }
+
+:root { --accent: #f5a623; }
+/* Hero */
+.hero { text-align: center; padding: 3rem 0 2rem; }
+.hero h1 { font-size: 2rem; margin-bottom: 0.75rem; }
+.hero-sub { color: #aaa; max-width: 560px; margin: 0 auto 1.5rem; }
+.hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem; }
+.hero-note { color: #888; font-size: 0.9rem; }
+/* Buttons */
+.btn { display: inline-block; padding: 0.6rem 1.4rem; border-radius: 6px; text-decoration: none; font-weight: 600; }
+.btn-primary { background: var(--accent, #f5a623); color: #000; }
+.btn-primary:hover { opacity: 0.85; text-decoration: none; }
+.btn-secondary { border: 1px solid var(--accent, #f5a623); color: var(--accent, #f5a623); }
+.btn-secondary:hover { background: var(--accent, #f5a623); color: #000; text-decoration: none; }
+/* Use case grid */
+.use-case-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+.use-case-card { background: #1a1a1a; border-radius: 8px; padding: 1.25rem; }
+.use-case-card h3 { font-size: 1rem; margin: 0.5rem 0 0.25rem; }
+.use-case-icon { font-size: 1.5rem; }
+.skip-link { color: #888; font-size: 0.9rem; }
+/* Pricing */
+.pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+.pricing-card { background: #1a1a1a; border-radius: 8px; padding: 1.5rem; position: relative; }
+.pricing-card ul { list-style: none; padding: 0; margin: 0.75rem 0; }
+.pricing-card li { padding: 0.3rem 0; color: #ccc; }
+.pricing-featured { border: 1px solid var(--accent, #f5a623); }
+.pricing-badge { background: var(--accent, #f5a623); color: #000; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 4px; display: inline-block; margin-bottom: 0.75rem; }
+.pricing-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+.pricing-table th, .pricing-table td { padding: 0.6rem 0.75rem; border-bottom: 1px solid #2a2a2a; text-align: left; }
+.pricing-table th { color: #888; font-size: 0.85rem; }
+.fine-print { color: #666; font-size: 0.85rem; }
+/* Code copy */
+.code-copy { display: flex; align-items: center; gap: 0.75rem; background: #1a1a1a; padding: 0.75rem 1rem; border-radius: 6px; margin: 0.5rem 0; }
+.code-copy code { flex: 1; font-family: monospace; }
+.code-copy button { background: #2a2a2a; border: none; color: #e8e8e8; padding: 0.4rem 0.75rem; border-radius: 4px; cursor: pointer; white-space: nowrap; }
+.code-copy button:hover { background: #3a3a3a; }
+/* Tabs */
+.tabs { display: flex; gap: 0.5rem; margin: 1rem 0 0; border-bottom: 1px solid #2a2a2a; }
+.tab { background: none; border: none; color: #888; padding: 0.5rem 1rem; cursor: pointer; border-bottom: 2px solid transparent; font-size: 0.9rem; }
+.tab.active { color: var(--accent, #f5a623); border-bottom-color: var(--accent, #f5a623); }
+.tab-content { display: none; padding: 1rem 0; }
+.tab-content.active { display: block; }
+.tab-content pre { background: #1a1a1a; padding: 1rem; border-radius: 6px; overflow-x: auto; }
+.tab-content code { font-family: monospace; font-size: 0.85rem; }
+.label { color: #888; font-size: 0.85rem; margin-top: 0.25rem; }
+/* Token paths */
+.token-paths { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+.token-path { background: #1a1a1a; padding: 1rem; border-radius: 8px; }
+.token-path strong { display: block; margin-bottom: 0.4rem; }
+/* Steps */
+.steps { padding-left: 1.5rem; }
+.steps li { margin-bottom: 0.75rem; }
+/* FAQ */
+.faq details { border-bottom: 1px solid #2a2a2a; padding: 0.75rem 0; }
+.faq summary { cursor: pointer; font-weight: 600; }
+.faq p { margin: 0.5rem 0 0; color: #aaa; }
+/* Filter pills */
+.filter-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+.pill { background: #1a1a1a; border: 1px solid #2a2a2a; color: #aaa; padding: 0.35rem 0.9rem; border-radius: 999px; cursor: pointer; font-size: 0.85rem; }
+.pill.active { background: var(--accent, #f5a623); color: #000; border-color: var(--accent, #f5a623); }
+/* Tool grid */
+.tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.5rem; }
+.tool-card { background: #1a1a1a; padding: 1rem; border-radius: 8px; }
+.tool-header { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+.tool-header code { font-size: 0.9rem; }
+.cost-badge { background: #2a2a2a; color: #f5a623; font-size: 0.75rem; padding: 0.15rem 0.5rem; border-radius: 4px; margin-left: auto; }
+.cat-badge { background: #1e2a1e; color: #6bcf6b; font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 4px; }
+.tool-card p { color: #aaa; font-size: 0.9rem; margin: 0; }
+/* Value badges */
+.value-badges { display: flex; gap: 1.5rem; flex-wrap: wrap; margin: 1.5rem 0; }
+.value-badges span { color: #aaa; }
+/* Listed on */
+.listed-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
+.listed-item { background: #1a1a1a; padding: 1rem; border-radius: 8px; text-decoration: none; color: #e8e8e8; display: block; }
+.listed-item:hover { background: #222; text-decoration: none; }
+.listed-item strong { color: var(--accent, #f5a623); }
+/* Sections */
+section { margin-bottom: 3rem; }
+section h2 { font-size: 1.4rem; margin-bottom: 1rem; }
+section h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; }
+.card-links { color: var(--accent, #f5a623); }
+/* Mobile */
+@media (max-width: 600px) {
+  .pricing-grid, .token-paths, .tool-grid, .listed-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 1.5rem; }
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav"><a href="/">Home</a><a href="/members/">Members</a><a href="/writings/">Writings</a><a href="https://nostrservices.jorgenclaw.ai">Nostr Services</a><a href="https://sovereignty.jorgenclaw.ai">Sovereignty</a><a href="https://sovereignty.jorgenclaw.ai/app">Badges</a><a href="/mcp-tools/" class="active">MCP Tools</a></nav>
+
+    <section class="hero">
+      <h1>Sovereign MCP &mdash; Nostr Tools for AI Agents</h1>
+      <p class="hero-sub">Give your AI agent the ability to read, write, and sign on Nostr. Pay per call in sats. No accounts, no monthly fees, no surveillance.</p>
+      <div class="hero-ctas">
+        <a href="#quick-start" class="btn btn-primary">Connect Now</a>
+        <a href="#tools" class="btn btn-secondary">Browse Tools</a>
+      </div>
+      <p class="hero-note">NIP-05 subscribers at jorgenclaw.ai get <strong>200 free calls/month</strong> &mdash; already included.</p>
+    </section>
+
+    <section id="what-is-mcp">
+      <h2>New to MCP? Start here.</h2>
+      <p>Model Context Protocol (MCP) is an open standard &mdash; think of it like a USB-C port for AI. It lets your AI assistant (Claude, ChatGPT, Cursor, and others) plug into external tools and services. When you connect an MCP server, your AI gains new abilities it didn&rsquo;t have before. This server gives your AI the ability to read and write on the Nostr network: post notes, send encrypted messages, manage a profile, follow people, and more.</p>
+
+      <div class="use-case-grid">
+        <div class="use-case-card">
+          <div class="use-case-icon">&#x1F4DD;</div>
+          <h3>Post to Nostr from a conversation</h3>
+          <p>Tell Claude: &ldquo;Post a note saying hello to my followers&rdquo; &mdash; it signs and publishes.</p>
+        </div>
+        <div class="use-case-card">
+          <div class="use-case-icon">&#x1F512;</div>
+          <h3>Send encrypted DMs</h3>
+          <p>Ask your agent to DM a contact privately &mdash; NIP-44 encrypted, end-to-end.</p>
+        </div>
+        <div class="use-case-card">
+          <div class="use-case-icon">&#x1FAAA;</div>
+          <h3>Manage your identity</h3>
+          <p>Update your profile, set relay lists, follow/unfollow &mdash; all through conversation.</p>
+        </div>
+      </div>
+
+      <p class="skip-link">Already know MCP? Skip to <a href="#quick-start">Quick Start</a> or <a href="#tools">Tool Reference</a>.</p>
+    </section>
+
+    <section id="pricing">
+      <h2>Pay What You Use. Own What You Build.</h2>
+
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <h3>Pay Per Call</h3>
+          <ul>
+            <li>5&ndash;50 sats per tool call</li>
+            <li>Charged via Lightning Network</li>
+            <li>No account required</li>
+            <li>No subscription</li>
+          </ul>
+          <a href="#quick-start" class="btn btn-secondary">Get a token &rarr;</a>
+        </div>
+
+        <div class="pricing-card pricing-featured">
+          <div class="pricing-badge">Best Value</div>
+          <h3>NIP-05 Subscriber Bundle</h3>
+          <ul>
+            <li><strong>200 free MCP calls/month</strong></li>
+            <li>Included with any NIP-05 identity</li>
+            <li>5,000 sats &mdash; one time</li>
+            <li>Human or agent identity</li>
+          </ul>
+          <a href="https://nostrservices.jorgenclaw.ai" class="btn btn-primary">Register a NIP-05 identity &rarr;</a>
+        </div>
+      </div>
+
+      <table class="pricing-table">
+        <thead>
+          <tr><th>Tool category</th><th>Cost per call</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Read operations (fetchProfile, fetchEvents)</td><td>5 sats</td></tr>
+          <tr><td>Write operations (postNote, follow, react)</td><td>10 sats</td></tr>
+          <tr><td>Signing operations (signNote, signEvent)</td><td>10 sats</td></tr>
+          <tr><td>Encrypted messaging (NIP-44/NIP-04 DMs)</td><td>20 sats</td></tr>
+          <tr><td>Relay management (setRelayList)</td><td>10 sats</td></tr>
+        </tbody>
+      </table>
+      <p class="fine-print">Exact pricing confirmed in the tool response before any payment is made. No surprise charges.</p>
+    </section>
+
+    <section id="quick-start">
+      <h2>Connect in 60 Seconds</h2>
+
+      <h3>Step 1 &mdash; Connection URL</h3>
+      <div class="code-copy">
+        <code id="mcp-url">https://nostr.jorgenclaw.ai/mcp</code>
+        <button id="copy-btn">Copy</button>
+      </div>
+      <p class="label">Streamable HTTP transport &mdash; MCP 2025-11-05 spec</p>
+
+      <h3>Step 2 &mdash; Add to your AI client</h3>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="claude">Claude Desktop</button>
+        <button class="tab" data-tab="cursor">Cursor / VSCode</button>
+        <button class="tab" data-tab="sdk">SDK / Agent</button>
+      </div>
+
+      <div id="tab-claude" class="tab-content active">
+        <p>Add to <code>claude_desktop_config.json</code>:</p>
+        <pre><code>{
+  "mcpServers": {
+    "nostr": {
+      "url": "https://nostr.jorgenclaw.ai/mcp",
+      "transport": "http",
+      "headers": {
+        "Authorization": "Bearer YOUR_TOKEN"
+      }
+    }
+  }
+}</code></pre>
+      </div>
+
+      <div id="tab-cursor" class="tab-content">
+        <pre><code>{
+  "mcp": {
+    "servers": {
+      "nostr": {
+        "url": "https://nostr.jorgenclaw.ai/mcp",
+        "headers": { "Authorization": "Bearer YOUR_TOKEN" }
+      }
+    }
+  }
+}</code></pre>
+      </div>
+
+      <div id="tab-sdk" class="tab-content">
+        <pre><code>from mcp import ClientSession, StreamableHttpTransport
+
+transport = StreamableHttpTransport(
+    "https://nostr.jorgenclaw.ai/mcp",
+    headers={"Authorization": "Bearer YOUR_TOKEN"}
+)</code></pre>
+      </div>
+
+      <h3>Step 3 &mdash; Get your token</h3>
+      <div class="token-paths">
+        <div class="token-path">
+          <strong>NIP-05 subscriber:</strong> Already registered at jorgenclaw.ai? Your subscriber token is included.
+          Retrieve it at: <a href="https://nostrservices.jorgenclaw.ai/token">nostrservices.jorgenclaw.ai/token</a>
+        </div>
+        <div class="token-path">
+          <strong>Pay per call:</strong> Purchase a prepaid credit bundle via Lightning and receive a token instantly.
+          <a href="#pricing" class="btn btn-secondary" style="margin-top:0.5rem">Buy credits &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="lightning">
+      <h2>How Lightning payments work here</h2>
+      <ol class="steps">
+        <li>Your AI sends a tool call to the server.</li>
+        <li>If you have a subscriber token: the call is deducted from your 200/month allowance.</li>
+        <li>If you&rsquo;re pay-per-call: the server responds with a Lightning invoice. Your agent pays it (or pauses for your approval). The call executes.</li>
+        <li>Payment is instant, non-custodial, and pseudonymous.</li>
+      </ol>
+
+      <div class="faq">
+        <details>
+          <summary>Does my AI automatically pay?</summary>
+          <p>Only if you configure it with a Lightning wallet (NWC or similar). Otherwise it will show you the invoice and wait for your approval.</p>
+        </details>
+        <details>
+          <summary>What if I run out of credits?</summary>
+          <p>Pay-per-call tokens are topped up by purchasing more credits. Subscribers get 200 calls reset monthly.</p>
+        </details>
+        <details>
+          <summary>Is this custodial?</summary>
+          <p>No. Payments go directly to the server operator (Scott Jorgensen / jorgenclaw.ai) via Lightning. No middleman holds funds.</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="tools">
+      <h2>What your AI can do</h2>
+
+      <div class="filter-pills">
+        <button class="pill active" data-filter="all">All</button>
+        <button class="pill" data-filter="notes">Notes</button>
+        <button class="pill" data-filter="profile">Profile</button>
+        <button class="pill" data-filter="social">Social</button>
+        <button class="pill" data-filter="messaging">Messaging</button>
+        <button class="pill" data-filter="signing">Signing</button>
+        <button class="pill" data-filter="read">Read</button>
+      </div>
+
+      <div class="tool-grid">
+        <div class="tool-card" data-cat="notes">
+          <div class="tool-header"><code>postNote</code><span class="cost-badge">10 sats</span><span class="cat-badge">Notes</span></div>
+          <p>Create and publish a plaintext note (kind 1) to your relay list.</p>
+        </div>
+        <div class="tool-card" data-cat="notes signing">
+          <div class="tool-header"><code>signNote</code><span class="cost-badge">10 sats</span><span class="cat-badge">Signing</span></div>
+          <p>Sign an unsigned note event with your configured signer.</p>
+        </div>
+        <div class="tool-card" data-cat="notes">
+          <div class="tool-header"><code>publishNote</code><span class="cost-badge">5 sats</span><span class="cat-badge">Notes</span></div>
+          <p>Publish an already-signed note event to your relays.</p>
+        </div>
+        <div class="tool-card" data-cat="profile">
+          <div class="tool-header"><code>createProfile</code><span class="cost-badge">10 sats</span><span class="cat-badge">Profile</span></div>
+          <p>Create a kind 0 profile metadata event.</p>
+        </div>
+        <div class="tool-card" data-cat="profile">
+          <div class="tool-header"><code>updateProfile</code><span class="cost-badge">10 sats</span><span class="cat-badge">Profile</span></div>
+          <p>Update an existing Nostr profile.</p>
+        </div>
+        <div class="tool-card" data-cat="profile read">
+          <div class="tool-header"><code>fetchProfile</code><span class="cost-badge">5 sats</span><span class="cat-badge">Read</span></div>
+          <p>Fetch any user&rsquo;s profile by npub.</p>
+        </div>
+        <div class="tool-card" data-cat="social">
+          <div class="tool-header"><code>follow</code><span class="cost-badge">10 sats</span><span class="cat-badge">Social</span></div>
+          <p>Add a pubkey to your follow list.</p>
+        </div>
+        <div class="tool-card" data-cat="social">
+          <div class="tool-header"><code>unfollow</code><span class="cost-badge">10 sats</span><span class="cat-badge">Social</span></div>
+          <p>Remove a pubkey from your follow list.</p>
+        </div>
+        <div class="tool-card" data-cat="social">
+          <div class="tool-header"><code>reactToEvent</code><span class="cost-badge">10 sats</span><span class="cat-badge">Social</span></div>
+          <p>React to an event (like, zap request, emoji).</p>
+        </div>
+        <div class="tool-card" data-cat="social">
+          <div class="tool-header"><code>repostEvent</code><span class="cost-badge">10 sats</span><span class="cat-badge">Social</span></div>
+          <p>Repost (boost) an event to your followers.</p>
+        </div>
+        <div class="tool-card" data-cat="social notes">
+          <div class="tool-header"><code>replyToEvent</code><span class="cost-badge">10 sats</span><span class="cat-badge">Social</span></div>
+          <p>Reply to a note in thread.</p>
+        </div>
+        <div class="tool-card" data-cat="social">
+          <div class="tool-header"><code>deleteEvent</code><span class="cost-badge">10 sats</span><span class="cat-badge">Social</span></div>
+          <p>Publish a deletion request for an event (NIP-09).</p>
+        </div>
+        <div class="tool-card" data-cat="messaging">
+          <div class="tool-header"><code>sendDmNip44</code><span class="cost-badge">20 sats</span><span class="cat-badge">Messaging</span></div>
+          <p>Send an encrypted DM using NIP-44 (current standard).</p>
+        </div>
+        <div class="tool-card" data-cat="messaging">
+          <div class="tool-header"><code>sendDmNip04</code><span class="cost-badge">20 sats</span><span class="cat-badge">Messaging</span></div>
+          <p>Send an encrypted DM using NIP-04 (legacy, for compatibility).</p>
+        </div>
+        <div class="tool-card" data-cat="messaging signing">
+          <div class="tool-header"><code>encryptNip44</code> / <code>decryptNip44</code><span class="cost-badge">20 sats</span><span class="cat-badge">Messaging</span></div>
+          <p>Encrypt or decrypt NIP-44 payloads manually.</p>
+        </div>
+        <div class="tool-card" data-cat="signing">
+          <div class="tool-header"><code>signNostrEvent</code><span class="cost-badge">10 sats</span><span class="cat-badge">Signing</span></div>
+          <p>Sign any custom Nostr event with your configured signer.</p>
+        </div>
+        <div class="tool-card" data-cat="signing">
+          <div class="tool-header"><code>createNostrEvent</code><span class="cost-badge">5 sats</span><span class="cat-badge">Signing</span></div>
+          <p>Build any Nostr event by kind, content, and tags &mdash; without publishing.</p>
+        </div>
+        <div class="tool-card" data-cat="signing">
+          <div class="tool-header"><code>publishNostrEvent</code><span class="cost-badge">5 sats</span><span class="cat-badge">Signing</span></div>
+          <p>Publish a pre-signed Nostr event to your relays.</p>
+        </div>
+        <div class="tool-card" data-cat="read">
+          <div class="tool-header"><code>fetchEvents</code><span class="cost-badge">5 sats</span><span class="cat-badge">Read</span></div>
+          <p>Fetch events from relays using a filter (kind, author, tags, since/until).</p>
+        </div>
+        <div class="tool-card" data-cat="read signing">
+          <div class="tool-header"><code>getSignerInfo</code><span class="cost-badge">5 sats</span><span class="cat-badge">Read</span></div>
+          <p>Check which signing mode is active and retrieve your public key.</p>
+        </div>
+        <div class="tool-card" data-cat="profile">
+          <div class="tool-header"><code>setRelayList</code><span class="cost-badge">10 sats</span><span class="cat-badge">Profile</span></div>
+          <p>Publish your relay list (NIP-65 kind 10002).</p>
+        </div>
+      </div>
+
+      <p><a href="https://github.com/jorgenclaw/nostr-mcp-server" class="card-links">View full API reference on GitHub &rarr;</a></p>
+    </section>
+
+    <section id="why-sovereign">
+      <h2>Why this server exists</h2>
+      <p>Most AI tools require you to hand your credentials to a third party, trust their privacy policy, and accept their terms of service. This server is different. It&rsquo;s built on Nostr &mdash; a protocol where your identity is a cryptographic key that you own. Your keys, your data, your social graph.</p>
+      <p>The Lightning payment model was a deliberate choice. No account signup means no email address handed over, no profile to build about you. You pay for what you use, pseudonymously, via Bitcoin. If you stop paying, nothing is owed and nothing is locked in.</p>
+      <p>This server is open-source. The code running it is the same code published at <a href="https://github.com/jorgenclaw/nostr-mcp-server">github.com/jorgenclaw/nostr-mcp-server</a>. You can verify what it does, run your own copy, or fork it.</p>
+      <div class="value-badges">
+        <span>&#x1F511; Your keys, your identity</span>
+        <span>&#x26A1; Pay-per-use, no lock-in</span>
+        <span>&#x1F419; Open source, forkable</span>
+      </div>
+      <p><a href="https://sovereignty.jorgenclaw.ai">Read more about sovereign design &rarr;</a></p>
+    </section>
+
+    <section id="listed-on">
+      <h2>Where you can find us</h2>
+      <div class="listed-grid">
+        <a href="https://glama.ai/mcp/servers/@jorgenclaw/nostr-mcp-server" class="listed-item">
+          <strong>Glama.ai</strong><br>Listed on Glama MCP Registry
+        </a>
+        <a href="https://github.com/jorgenclaw/nostr-mcp-server" class="listed-item">
+          <strong>GitHub</strong><br>Open source &mdash; jorgenclaw/nostr-mcp-server
+        </a>
+        <a href="https://mcp.so" class="listed-item">
+          <strong>mcp.so</strong><br>Listed on mcp.so marketplace
+        </a>
+      </div>
+    </section>
+
+    <div class="footer"><p><a href="https://jorgenclaw.ai">jorgenclaw.ai</a></p></div>
+  </div>
+
+  <script>
+  // Tab switching
+  document.querySelectorAll('.tabs .tab').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var name = this.getAttribute('data-tab');
+      document.querySelectorAll('.tab-content').forEach(function(el) { el.classList.remove('active'); });
+      document.querySelectorAll('.tabs .tab').forEach(function(el) { el.classList.remove('active'); });
+      document.getElementById('tab-' + name).classList.add('active');
+      this.classList.add('active');
+    });
+  });
+
+  // Tool filter pills
+  document.querySelectorAll('.filter-pills .pill').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var cat = this.getAttribute('data-filter');
+      document.querySelectorAll('.tool-card').forEach(function(card) {
+        card.style.display = (cat === 'all' || card.dataset.cat.indexOf(cat) !== -1) ? '' : 'none';
+      });
+      document.querySelectorAll('.filter-pills .pill').forEach(function(p) { p.classList.remove('active'); });
+      this.classList.add('active');
+    });
+  });
+
+  // Copy button
+  document.getElementById('copy-btn').addEventListener('click', function() {
+    var btn = this;
+    navigator.clipboard.writeText(document.getElementById('mcp-url').textContent);
+    btn.textContent = 'Copied!';
+    setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+  });
+  </script>
+</body>
+</html>

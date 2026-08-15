@@ -235,3 +235,18 @@ a.header-person:hover .avatar { border-color: #5b8dd9; }
   .footer-nav { flex-direction: column; gap: 1.5rem; }
 }
 
+/* Meet Jorgenclaw article page */
+.meet-page h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #e8e8e8;
+}
+
+.meet-page p {
+  font-size: 0.95rem;
+  color: #ccc;
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+

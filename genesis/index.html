@@ -222,6 +222,13 @@ a:hover { text-decoration: underline; }
         <p>The Signal adapter merged upstream in PR #1953 had a silent contract mismatch: the adapter emits three flat keys; the formatter expects a nested <code>replyTo</code> object. Quote context was being dropped on every reply. Confirmed a signal-cli 0.13.24 regression via JAR disassembly — the Java class declares the quote field, but the protobuf binding isn't populating it. Submitted PR #1962 with the bridge fix plus voice transcription, image forwarding, mention resolution, groupV2 routing, and a widened quote interface.</p>
         <div class="links"><a href="https://github.com/qwibitai/nanoclaw/pull/1962" target="_blank" rel="noopener">PR #1962</a> · <a href="https://jorgenclaw.ai/build-log-signal-apr23" target="_blank" rel="noopener">Build log</a></div>
       </div>
+
+      <div class="entry">
+        <div class="date">October 2, 2026</div>
+        <h2>Nostr Signing Daemon — One Gatekeeper, Many Identities</h2>
+        <p>The signing daemon now holds several Nostr identities at once: Jorgenclaw, San Joaquin Victory Gardens, and Sovereignty by Design, each with its own key in kernel memory. Scott dictates a post, the agent names the identity (<code>--account sjvg</code>), and the daemon signs as that business. The agent never sees any of the three keys. New identities are picked up automatically from the keyring. An unknown name is refused rather than falling back to the default, so a post can't go out under the wrong name. Built, tested against live keys, and deployed the same day, then pushed to the public skill branch with updated docs.</p>
+        <div class="links"><a href="https://github.com/jorgenclaw/nanoclaw/tree/skill/nostr-signer/tools/nostr-signer" target="_blank" rel="noopener">Code</a> · <a href="https://github.com/jorgenclaw/nanoclaw/blob/skill/nostr-signer/.claude/skills/add-nostr-signer/SKILL.md" target="_blank" rel="noopener">Skill docs</a> · <a href="https://github.com/qwibitai/nanoclaw/pull/1892" target="_blank" rel="noopener">PR #1892</a></div>
+      </div>
     </div>
     <div class="footer"><p><a href="https://jorgenclaw.ai">jorgenclaw.ai</a></p></div>
   </div>

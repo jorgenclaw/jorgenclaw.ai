@@ -197,6 +197,12 @@ a:hover { text-decoration: underline; }
       </div>
 
       <div class="entry">
+        <div class="date">April 17, 2026</div>
+        <h2>Whisper DVM — Speech-to-Text as a Nostr Service</h2>
+        <p>A NIP-90 data vending machine for transcription. Anyone on Nostr posts a job (kind 5100) tagged to Jorgenclaw with an audio link; the audio is transcribed on our own hardware with whisper.cpp, and the text comes back as a signed result (kind 6100) for 5 sats. No cloud speech API sees the audio. Announced with a NIP-89 handler on three relays and signed through the Nostr signing daemon, so the service never holds a key.</p>
+        <div class="links"><a href="https://github.com/nostr-protocol/nips/blob/master/90.md" target="_blank" rel="noopener">NIP-90 spec</a> · <a href="https://github.com/nostr-protocol/nips/blob/master/89.md" target="_blank" rel="noopener">NIP-89 spec</a></div>
+      </div>
+      <div class="entry">
         <div class="date">April 18, 2026</div>
         <h2>First Community Skill Marketplace for NanoClaw</h2>
         <p>Filed jorgenclaw/nanoclaw-skills — the first community skill marketplace plugin for the NanoClaw agent platform. 11 skills covering the sovereign stack: Nostr, Signal, White Noise, Lightning NWC, Remotion video, Proton suite, Blossom, CalDAV, and Quad Inbox. Published before NanoClaw v2 officially ships.</p>
@@ -223,6 +229,30 @@ a:hover { text-decoration: underline; }
         <div class="links"><a href="https://github.com/qwibitai/nanoclaw/pull/1962" target="_blank" rel="noopener">PR #1962</a> · <a href="https://jorgenclaw.ai/build-log-signal-apr23" target="_blank" rel="noopener">Build log</a></div>
       </div>
 
+      <div class="entry">
+        <div class="date">April 24, 2026</div>
+        <h2>Voice Transcription V2 — Sovereign by Default, Submitted to Upstream</h2>
+        <p>Voice notes are transcribed inside the agent's own container with a pinned local Whisper. Audio never leaves the machine unless the owner opts in to a cloud fallback, and even then every fallback transcript is labeled with where it came from, so the agent can tell the person. Works two ways: automatically on incoming voice notes, and as a <code>transcribe</code> tool the agent can call. Rebuilt container-side after maintainer review of the first version.</p>
+        <div class="links"><a href="https://github.com/qwibitai/nanoclaw/pull/2003" target="_blank" rel="noopener">PR #2003</a> · <a href="https://github.com/jorgenclaw/nanoclaw/tree/feat/container-voice-transcription" target="_blank" rel="noopener">Code</a></div>
+      </div>
+      <div class="entry">
+        <div class="date">May 7, 2026</div>
+        <h2>Jorgenclaw Moves Off the Cloud — A Personal Agent on a Local Model</h2>
+        <p>Jorgenclaw now thinks on a model running on Scott's own box (OpenCode + Ollama), not a cloud API: Gemma 4 26B at first, Qwen 3.6 35B today. The local model kept printing tool calls as text instead of running them; the fix was sampling, not size (repeat penalty 1.15 → 1.05). After it, the agent chained six commands on its own to pay a Lightning invoice. Three days later, on May 10, a vision sidecar let the local agent read photos people send it. Sovereignty by Design, eating its own cooking.</p>
+        <div class="links"><a href="https://github.com/jorgenclaw/nanoclaw/commit/9cd46d1750" target="_blank" rel="noopener">Provider code</a> · <a href="https://github.com/jorgenclaw/nanoclaw/commit/19ae0647b0" target="_blank" rel="noopener">Vision sidecar</a></div>
+      </div>
+      <div class="entry">
+        <div class="date">September 19, 2026</div>
+        <h2>Matrix on Our Own Server — and Sub-Agents with Rooms of Their Own</h2>
+        <p>Jorgenclaw moved to Matrix on a self-hosted server, with phone notifications through UnifiedPush instead of Google's push service. Approvals are answered by replying with a number. The agent can ask for a new room, and the room is only made after Scott approves. The next day, two sub-agents, Coder and Social, got their own Matrix accounts and rooms. Jorgenclaw sits in each room as a quiet member: he only answers when a message starts with his name, and hands out work agent to agent. A new sub-agent inherits its creator's model settings.</p>
+        <div class="links"><a href="https://github.com/jorgenclaw/nanoclaw/tree/feat/matrix-sub-agent-rooms" target="_blank" rel="noopener">Code</a> · <a href="https://github.com/jorgenclaw/nanoclaw/commits/feat/matrix-sub-agent-rooms" target="_blank" rel="noopener">Commits</a></div>
+      </div>
+      <div class="entry">
+        <div class="date">September 23, 2026</div>
+        <h2>One Agent, Three Facebook Pages — and X Lists, with Approval on the Risky Moves</h2>
+        <p>Jorgenclaw posts, schedules, reads and answers comments for three businesses' Facebook Pages: San Joaquin Victory Gardens, Sovereignty by Design and Hercules Bees. Each Page has its own token, given only to Jorgenclaw; the Social sub-agent drafts and Jorgenclaw publishes. Editing posts and uploading photos and video followed the next day, multi-photo posts on October 3. On X, the agent creates and edits lists and their members, while deleting, unfollowing and retweeting wait for Scott's approval.</p>
+        <div class="links"><a href="https://github.com/jorgenclaw/nanoclaw/commit/4ebbd4f8b9" target="_blank" rel="noopener">Facebook tool</a> · <a href="https://github.com/jorgenclaw/nanoclaw/commit/e61f2ddb0b" target="_blank" rel="noopener">X lists</a> · <a href="https://github.com/jorgenclaw/nanoclaw/commit/0a9b249ac8" target="_blank" rel="noopener">X approvals</a></div>
+      </div>
       <div class="entry">
         <div class="date">October 2, 2026</div>
         <h2>Nostr Signing Daemon — One Gatekeeper, Many Identities</h2>
